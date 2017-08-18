@@ -26,6 +26,4 @@ submit.onclick = function(){
     }
     var ul = document.getElementById('namelist');
     ul.innerHTML = list;
-    
-    
-}
+};
