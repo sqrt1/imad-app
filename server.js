@@ -1,10 +1,16 @@
 var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
-
+var Pool = require('pg').Pool;
 var app = express();
 app.use(morgan('combined'));
-
+var config = {
+    user : 'anshumanupadhyay1',
+    database : 'anshumanupadhyay1',
+    host : 'db.imad.hasura-app.io',
+    port : '5432',
+    password : process.env.DB_PASSWORD
+};
  var articles = {
   'article-one' : {
      title:'Articel One | Anshuman Upadhyay',
@@ -70,6 +76,17 @@ function createTemplate(data){
      `;
      return htmlTemplate;
  }
+ var pool = new Pool(config);
+ app.get('/test-db', function(req, res){
+    pool.query('SELECT * from test', function(err, result){
+       if(err){
+           res.status(500).send(err.toString());
+       }else{
+           res.send(JSON.stringify(result));
+       } 
+    });
+     
+ });
  
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
@@ -84,6 +101,17 @@ app.get('/ui/main.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'main.js'));
 });
 
+app.get('/articles/:articleName', function(req, res){
+   var articleName = req.params.articleName;
+   pool.query("SELECT * from article where title="+req.params.articleName, function(err,result){
+       if(err){
+           res.status(500).send(err.toString());
+       }else{
+           
+       }
+   });
+   
+});
 app.get('/:articleName', function (req, res){
     var articleName = req.params.articleName;
    res.send(createTemplate(articles[articleName]));
