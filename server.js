@@ -121,6 +121,11 @@ app.get('/articles/:articleName', function (req, res){
    
 });
 
+app.get('/hash', function(req, res){
+   var hashString = hash(req.params.input);
+   res.send(hashString);
+});
+
 app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
 });
