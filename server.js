@@ -126,7 +126,7 @@ function hash(input){
     return hashed.toString('hex');
 }
 
-app.get('/hash', function(req, res){
+app.get('/hash/:input', function(req, res){
    var hashString = hash(req.params.input);
    res.send(hashString);
 });
