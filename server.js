@@ -89,6 +89,19 @@ function createTemplate(data){
      
  });
  
+ app.get('/create-user', function(req, res){
+    var salt = crypto.randomBytes(128).toString();
+    var hashedDbPassword = hash(password, salt); 
+    pool.query('INSERT into "user" values ($1, $2)', [username, hashedDbPassword], function(err, result){
+       if(err){
+           res.status(500).send(err.toString());
+           
+       } else{
+           res.send('User successfully created '+ username);
+       }
+    });
+    
+ });
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
