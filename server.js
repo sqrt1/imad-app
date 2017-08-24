@@ -120,8 +120,8 @@ function createTemplate(data){
            }
            else{
                var dbPassword = result.rows[0].password;
-               var salt = dbPassword.split('$').get[2];
-               var hashPassrd = hash(password, salt);
+               var salt = dbPassword.split('$')[2];
+               var hashPassword = hash(password, salt);
                if(dbPassword === hashPassrd){
                 res.send('Correct credentials');
                }
