@@ -120,7 +120,7 @@ function createTemplate(data){
            }
            else{
                var dbPassword = result.rows[0].password;
-               var salt = dbPassword.split('$');
+               var salt = dbPassword.split('$').get[2];
                var hashPassrd = hash(password, salt);
                if(dbPassword === hashPassrd){
                 res.send('Correct credentials');
@@ -165,7 +165,7 @@ app.get('/articles/:articleName', function (req, res){
 });
 function hash(input, salt){
     var hashed = crypto.pbkdf2Sync(input, salt, 10000, 512, 'sha512');
-    return hashed.toString('hex');
+    return ["pdkdf2","10000",salt,hashed.toString('hex')].join('$');
 }
 
 app.get('/hash/:input', function(req, res){
