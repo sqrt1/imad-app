@@ -6,7 +6,7 @@ var app = express();
 var crypto = require('crypto');
 var bodyParser = require('body-parser');
 app.use(morgan('combined'));
-app.use(bodyParser.getjson());
+app.use(bodyParser.json());
 var config = {
     user : 'anshumanupadhyay1',
     database : 'anshumanupadhyay1',
