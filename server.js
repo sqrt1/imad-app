@@ -123,7 +123,7 @@ function createTemplate(data){
                var salt = dbPassword.split('$');
                var hashPassrd = hash(password, salt);
                if(dbPassword === hashPassrd){
-                res.send('User successfully created '+ username);
+                res.send('Correct credentials');
                }
            }
        }
