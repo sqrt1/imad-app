@@ -97,7 +97,7 @@ function createTemplate(data){
     var password = req.body.password;
     var salt = crypto.randomBytes(128).toString('hex');
     var hashedDbPassword = hash(password, salt); 
-    pool.query('INSERT INTO "user" (id, username, password) VALUES (1,$1, $2)', [username, hashedDbPassword], function(err, result){
+    pool.query('INSERT INTO "user" (id, username, password) VALUES (2,$1, $2)', [username, hashedDbPassword], function(err, result){
        if(err){
            res.status(500).send(err.toString());
            
