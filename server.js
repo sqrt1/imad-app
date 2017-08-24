@@ -2,9 +2,10 @@ var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
 var Pool = require('pg').Pool;
-var app = express();
 var crypto = require('crypto');
 var bodyParser = require('body-parser');
+
+var app = express();
 app.use(morgan('combined'));
 app.use(bodyParser.json());
 var config = {
@@ -94,7 +95,7 @@ function createTemplate(data){
  app.post('/create-user', function(req, res){
     var username = req.body.username;
     var password = req.body.password;
-    var salt = crypto.randomBytes(128).toString();
+    var salt = crypto.randomBytes(128).toString('hex');
     var hashedDbPassword = hash(password, salt); 
     pool.query('INSERT into "user" values ($1, $2)', [username, hashedDbPassword], function(err, result){
        if(err){
