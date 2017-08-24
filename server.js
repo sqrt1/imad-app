@@ -122,7 +122,7 @@ function createTemplate(data){
                var dbPassword = result.rows[0].password;
                var salt = dbPassword.split('$')[2];
                var hashPassword = hash(password, salt);
-               if(dbPassword === hashPassrd){
+               if(dbPassword === hashPassword){
                 res.send('Correct credentials');
                }
            }
