@@ -116,7 +116,7 @@ function createTemplate(data){
            
        } else{
            if(result.rows.length === 0){
-            res.status(403).send('No such username/password');   
+            res.send(403).send('No such username/password');   
            }
            else{
                var dbPassword = result.rows[0].password;
