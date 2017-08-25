@@ -125,6 +125,9 @@ function createTemplate(data){
                if(dbPassword === hashPassword){
                 res.send('Correct credentials');
                }
+               else{
+                   res.status(403).send('Username/Password is invalid');
+               }
            }
        }
      
